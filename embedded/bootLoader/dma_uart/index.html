@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>dma+uart - 小陈来了</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../../css/mermaid.min.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "dma+uart";
+    var mkdocs_page_input_path = "embedded\\bootLoader\\dma_uart.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> 小陈来了</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">简介</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">编程</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">编程语言</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">c</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../language/c/pointer/">指针传递</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">c++</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../language/c%2B%2B/C%2B%2BPrimer/">C++Primer</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">嵌入式</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Bootloader</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">dma+uart</a>
+    <ul class="current">
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">dma+uart</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#_1">用到的资源</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#flash">内部Flash分布图</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#flash_1">外部flash分布图</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_2">升级指令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#bootloader">bootloader流程图</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">usb虚拟串口</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../usb_vitual_uart/">usb虚拟串口</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">小陈来了</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>嵌入式 &raquo;</li>
+        
+      
+        
+          <li>Bootloader &raquo;</li>
+        
+      
+        
+          <li>dma+uart &raquo;</li>
+        
+      
+    
+    <li>dma+uart</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dmauart">dma+uart</h1>
+<p>使用dma双缓存和串口实现bootLoader升级.</p>
+<h2 id="_1">用到的资源</h2>
+<ul>
+<li><code>uart</code> - 通过串口来接收升级文件.</li>
+<li><code>dma</code> - 使用dma双缓冲的满中断来接收数据. </li>
+<li><code>spi</code> - 使用SPI控制外部flash读写.</li>
+<li><code>外部flash</code> - w25q128，升级过程中需要将固件暂存到外部flash. </li>
+</ul>
+<h2 id="flash">内部Flash分布图</h2>
+<p><img alt="flash_memory" src="../img/stm32_flash.png" />
+  * stm32f103zet6的flash是512KB，另外STM32的内部flash扇区大小为2KB</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="center">Address</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bootloader</td>
+<td align="center">0x08000000 - 0x08009FFF</td>
+<td>40KB</td>
+</tr>
+<tr>
+<td>App size</td>
+<td align="center">0x0800A000 - 0x0800A003</td>
+<td>4Bytes</td>
+</tr>
+<tr>
+<td>App crc</td>
+<td align="center">0x0800A004 - 0x0800A005</td>
+<td>2Bytes</td>
+</tr>
+<tr>
+<td>Reserve</td>
+<td align="center">0x0800A006 - 0x0800A7FF</td>
+<td>2042Bytes</td>
+</tr>
+<tr>
+<td>App</td>
+<td align="center">0x0800A800 - 0x0807FFFF</td>
+<td>470KB</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h2 id="flash_1">外部flash分布图</h2>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="center">Address</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Font lib</td>
+<td align="center">0x000000 - 0x3FFFFF</td>
+<td>4MB</td>
+</tr>
+<tr>
+<td>System parameter</td>
+<td align="center">0x400000 - 0x4FFFFF</td>
+<td>1MB</td>
+</tr>
+<tr>
+<td>App size</td>
+<td align="center">0x500000 - 0x500003</td>
+<td>4Bytes</td>
+</tr>
+<tr>
+<td>App &amp; crc</td>
+<td align="center">0x500004 - 0x577FFF</td>
+<td>480KB-4Bytes</td>
+</tr>
+<tr>
+<td>FATFS</td>
+<td align="center">0x578000 - 0xFFFFFF</td>
+<td>10MB</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h2 id="_2">升级指令</h2>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Sequence</th>
+<th align="center">Code</th>
+<th>Descriptor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td align="center">0xAA</td>
+<td>Head</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">0x10</td>
+<td>Command</td>
+</tr>
+<tr>
+<td>3-6</td>
+<td align="center">0x000000 - 0x75800</td>
+<td>App size</td>
+</tr>
+<tr>
+<td>7-8</td>
+<td align="center">0x5A 0xA5</td>
+<td>Tail</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h2 id="bootloader">bootloader流程图</h2>
+<h3 id="_3">主流程</h3>
+<pre class="uml-flowchart"><code>st=&gt;start: 开始:&gt;
+e=&gt;end: 结束:&gt;
+op1=&gt;operation: 初始化
+write_to_flash=&gt;operation: 写入内部flash
+staty_at_bootloader=&gt;operation: 停留在bootloader 
+cond1=&gt;condition: Flash中
+APP数据有效:&gt;
+cond2=&gt;condition: APP数据
+正确:&gt; 
+jump_to_app=&gt;operation: 跳转到APP
+waiting_for_update=&gt;operation: 等待升级
+st-&gt;op1-&gt;cond1
+cond1(yes)-&gt;write_to_flash-&gt;cond2
+cond1(no)-&gt;staty_at_bootloader-&gt;waiting_for_update(down)
+cond2(yes)-&gt;jump_to_app-&gt;e
+cond2(no)-&gt;staty_at_bootloader-&gt;waiting_for_update(down)</code></pre>
+<h3 id="_4">升级流程</h3>
+<pre class="uml-flowchart"><code>st=&gt;start: 开始:&gt;
+e=&gt;end: 结束:&gt;
+initial_uart=&gt;operation: 初始化串口
+initial_dma=&gt;operation: 初始化DMA
+receive_firmware_data=&gt;operation: 接收升级数据
+write_to_flash=&gt;operation: 写入内部flash 
+cond1=&gt;condition: 收到
+升级指令:&gt;
+cond2=&gt;condition: APP数据
+有效:&gt;
+cond3=&gt;condition: APP数据
+正确:&gt; 
+jump_to_app=&gt;operation: 跳转到APP
+waiting_for_update=&gt;operation: 等待升级
+st-&gt;initial_uart-&gt;initial_dma-&gt;cond1
+cond1(yes)-&gt;receive_firmware_data-&gt;cond2
+cond1(no)-&gt;cond1
+cond2(yes)-&gt;write_to_flash-&gt;cond3
+cond2(no)-&gt;cond1
+cond3(yes)-&gt;jump_to_app-&gt;e
+cond3(no)-&gt;cond1</code></pre>
+<h3 id="_5">接收升级数据流程</h3>
+<h4 id="_6">流程图</h4>
+<pre class="uml-flowchart"><code>st=&gt;start: 开始:&gt;
+e=&gt;end: 结束:&gt;  
+write_to_extflash=&gt;operation: 写入外部flash
+set_current_length_max_length=&gt;operation: 设置当前缓存长度为最大缓存长度
+set_current_length_actual_length=&gt;operation: 设置当前缓存长度为实际接收长度
+dma_full_interrupt=&gt;condition: DMA满中断
+exchange_buffer=&gt;operation: 切换缓冲区地址
+get_last_buffer=&gt;operation: 获取上一次缓存数据
+less_bytes_large_than_receive=&gt;condition: 剩余长度&gt;=
+最大缓存字节
+st-&gt;dma_full_interrupt
+dma_full_interrupt(yes)-&gt;less_bytes_large_than_receive
+dma_full_interrupt(no)-&gt;dma_full_interrupt
+less_bytes_large_than_receive(yes)-&gt;set_current_length_max_length-&gt;exchange_buffer-&gt;get_last_buffer-&gt;write_to_extflash-&gt;e
+less_bytes_large_than_receive(no)-&gt;set_current_length_actual_length-&gt;exchange_buffer-&gt;get_last_buffer-&gt;write_to_extflash-&gt;e</code></pre>
+<h4 id="_7">代码</h4>
+<div class="highlight"><pre><span></span><code>static uint8_t currentBuffer[REC_BUFF_SIZE];   
+static uint8_t buffer_1[REC_BUFF_SIZE];  
+static uint8_t buffer_2[REC_BUFF_SIZE];   
+extern uint32_t s_u32_app_total_size;
+uint32_t current_flash_address = 0; 
+
+deviceaccess_uart_t uart_port1 = {UART_PORT_1,115200,8,uart_rx_handle,NULL}; 
+deviceaccess_dma_t dma_1 = {DMA_ID_1,DMA_CH_5,DMA_TYPE_TC,(uint32_t)buffer_1,(uint32_t)buffer_2,NULL,REC_BUFF_SIZE,dma_event_handle}; 
+
+static uint32_t current_dma_buffer_length = REC_BUFF_SIZE;
+static uint32_t last_dma_buffer_length = REC_BUFF_SIZE;
+uint16_t actual_receive_length = 0;
+
+actual_receive_length = current_dma_buffer_length - left_count; 
+
+uint32_t i = 0;
+uint32_t less_bytes = (CONFIG_EXTFLASH_APP_ADDRESS+s_u32_app_total_size) - (current_flash_address+actual_receive_length);
+
+if(less_bytes &gt;= actual_receive_length)
+{
+    current_dma_buffer_length = actual_receive_length;
+}
+else 
+{
+    current_dma_buffer_length = less_bytes%actual_receive_length;
+}    
+
+g_deviceaccess_dma_control(&amp;dma_1, CMD_GET_BUFFER,&amp;current_dma_buffer_length); 
+
+if (NULL == dma_1.current_address)
+{
+    return;
+}
+
+memset(currentBuffer,0,last_dma_buffer_length);
+
+memcpy(currentBuffer,(void *)dma_1.current_address,last_dma_buffer_length);
+
+last_dma_buffer_length = current_dma_buffer_length; 
+
+if (current_flash_address&lt;(CONFIG_EXTFLASH_APP_ADDRESS+s_u32_app_total_size))
+{
+    //add your code write data to flash
+    current_flash_address = current_flash_address+actual_receive_length;
+} 
+
+if (current_flash_address &gt;= (CONFIG_EXTFLASH_APP_ADDRESS+s_u32_app_total_size))
+{
+    current_dma_buffer_length = REC_BUFF_SIZE;
+    last_dma_buffer_length = REC_BUFF_SIZE; 
+
+    g_deviceaccess_dma_control(&amp;dma_1, CMD_GET_BUFFER,&amp;current_dma_buffer_length);
+
+    USART_DMACmd(USART1, USART_DMAReq_Rx, DISABLE); 
+    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+
+    //check firmware data,if correct write the data to flash(internal)
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../usb_vitual_uart/" class="btn btn-neutral float-right" title="usb虚拟串口">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../language/c%2B%2B/C%2B%2BPrimer/" class="btn btn-neutral" title="C++Primer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../language/c%2B%2B/C%2B%2BPrimer/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../usb_vitual_uart/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.0/mermaid.min.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js" defer></script>
+      <script src="../../../js/umlconvert.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
